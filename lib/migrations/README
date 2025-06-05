@@ -1,1 +1,78 @@
 Generic single-database configuration.
+This project is a Python-based Freebie Tracker using SQLAlchemy ORM with a SQLite database.
+It models companies giving freebies to developers, tracking items, values, and relationships.
+
+Setup Instructions
+Clone the repo
+
+bash
+Copy
+Edit
+git clone <your-repo-url>
+cd python-p3-freebie-tracker
+Create and activate your virtual environment (optional but recommended)
+
+bash
+Copy
+Edit
+python -m venv venv
+source venv/bin/activate   # On Windows use `venv\Scripts\activate`
+Install dependencies
+
+bash
+Copy
+Edit
+pip install -r requirements.txt
+Initialize the database schema
+Run the following in a Python shell or add a script:
+
+python
+Copy
+Edit
+from models import Base
+from sqlalchemy import create_engine
+
+engine = create_engine('sqlite:///freebies.db')
+Base.metadata.create_all(engine)
+Seed the database
+Run the seed script to populate initial data:
+
+bash
+Copy
+Edit
+python lib/seed.py
+Run the debug session
+Start an interactive session to explore your data models:
+
+bash
+Copy
+Edit
+python lib/debug.py
+Project Structure
+models.py — Contains SQLAlchemy models for Company, Dev, and Freebie with relationships and instance methods.
+
+lib/seed.py — Script to add sample data to the database.
+
+lib/debug.py — Debug script to query and inspect database contents interactively.
+
+freebies.db — SQLite database file created after running the seed script.
+
+Instance Methods
+Company.give_freebie(dev, item_name, value) — Adds a freebie for a dev.
+
+Dev.received_one(item_name, value, company) — Checks if a dev received a specific freebie.
+
+Dev.freebies_list() — Returns a list of freebies a dev has received.
+
+Notes
+The project uses naming conventions for database constraints to keep schema clean and maintainable.
+
+Designed for learning ORM relationships, instance methods, and SQLite integration.
+
+How to Extend
+Add more instance methods or queries.
+
+Build a CLI or web interface to interact with the tracker.
+
+Add user input validation and error handling.
+
